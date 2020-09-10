@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>ceshi</title>
-    <url>/blog.io/2020/09/08/ceshi/</url>
-    <content><![CDATA[<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><img src="/blog.io/2020/09/08/ceshi/c.png" class>]]></content>
-  </entry>
-  <entry>
     <title>Hello World</title>
-    <url>/blog.io/2020/09/08/hello-world/</url>
+    <url>/msj_blog.io/2020/09/08/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
@@ -25,15 +20,20 @@
   </entry>
   <entry>
     <title>测试</title>
-    <url>/blog.io/2020/09/08/my-first-blog/</url>
-    <content><![CDATA[<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><img src="/blog.io/2020/09/08/my-first-blog/image-20200908100846386.png" class> ]]></content>
+    <url>/msj_blog.io/2020/09/08/my-first-blog/</url>
+    <content><![CDATA[<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><img src="/msj_blog.io/2020/09/08/my-first-blog/image-20200908100846386.png" class> ]]></content>
+  </entry>
+  <entry>
+    <title>ceshi</title>
+    <url>/msj_blog.io/2020/09/08/ceshi/</url>
+    <content><![CDATA[<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><img src="/msj_blog.io/2020/09/08/ceshi/c.png" class>]]></content>
   </entry>
   <entry>
     <title>这是一个新的博客</title>
-    <url>/blog.io/2020/09/08/%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<p>我现在写了一个段落，并且想在这个段落的某一个地方<img src="/blog.io/2020/09/08/%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8D%9A%E5%AE%A2/%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8D%9A%E5%AE%A2.png" class>引入一张图片</p>
-<h1 id="觉起"><a href="#觉起" class="headerlink" title="觉起"></a>觉起</h1><img src="/blog.io/2020/09/08/%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8D%9A%E5%AE%A2/%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8D%9A%E5%AE%A2.png" class>
+    <url>/msj_blog.io/2020/09/08/%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<p>我现在写了一个段落，并且想在这个段落的某一个地方<img src="/msj_blog.io/2020/09/08/%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8D%9A%E5%AE%A2/%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8D%9A%E5%AE%A2.png" class>引入一张图片</p>
+<h1 id="觉起"><a href="#觉起" class="headerlink" title="觉起"></a>觉起</h1><img src="/msj_blog.io/2020/09/08/%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8D%9A%E5%AE%A2/%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8D%9A%E5%AE%A2.png" class>
 
-<img src="/blog.io/2020/09/08/%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8D%9A%E5%AE%A2/%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8D%9A%E5%AE%A2.png" class>]]></content>
+<img src="/msj_blog.io/2020/09/08/%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8D%9A%E5%AE%A2/%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8D%9A%E5%AE%A2.png" class>]]></content>
   </entry>
 </search>
