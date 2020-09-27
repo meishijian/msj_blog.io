@@ -1,0 +1,347 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>前端面试题 -- Vue 基础 | 没时间</title><meta name="description" content="题1、data 中定义的数据如何在页面中显示？答： 1、如果是字符串、数字等，使用插值表达式 &amp;#123;&amp;#123;...&amp;#125;&amp;#125; 2、如果是数组一般使用 v-for  题2、生命周期函数有哪些？项目中是怎么使用的？答： 1、创建前后、挂载前后、销毁前后、更新前后、被激活、被隐藏等 2、项目中常用的：      created（创建后）：调接口获取页面初始数据。     moun"><meta name="keywords" content="vue,前端面试题"><meta name="author" content="没时间"><meta name="copyright" content="没时间"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="shortcut icon" href="/msj_blog.io/img/favicon.png"><link rel="canonical" href="https://github.com/meishijian/msj_blog.io/2020/09/26/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98-Vue%20%E5%9F%BA%E7%A1%80/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="article"><meta property="og:title" content="前端面试题 -- Vue 基础"><meta property="og:url" content="https://github.com/meishijian/msj_blog.io/2020/09/26/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98-Vue%20%E5%9F%BA%E7%A1%80/"><meta property="og:site_name" content="没时间"><meta property="og:description" content="题1、data 中定义的数据如何在页面中显示？答： 1、如果是字符串、数字等，使用插值表达式 &amp;#123;&amp;#123;...&amp;#125;&amp;#125; 2、如果是数组一般使用 v-for  题2、生命周期函数有哪些？项目中是怎么使用的？答： 1、创建前后、挂载前后、销毁前后、更新前后、被激活、被隐藏等 2、项目中常用的：      created（创建后）：调接口获取页面初始数据。     moun"><meta property="og:image" content="https://gitee.com/meishijian/pic_imgage/raw/master/image/27.jpg"><meta property="article:published_time" content="2020-09-26T00:20:10.000Z"><meta property="article:modified_time" content="2020-09-27T07:54:54.535Z"><meta name="twitter:card" content="summary"><link rel="stylesheet" href="/msj_blog.io/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script>var GLOBAL_CONFIG = { 
+  root: '/msj_blog.io/',
+  hexoversion: '5.1.1',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime: '天',
+  date_suffix: {"one_hour":"刚刚","hours":"小时前","day":"天前"},
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+    },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2020-09-27 15:54:54'
+}</script><noscript><style type="text/css">
+#nav {
+  opacity: 1
+}
+.justified-gallery img {
+  opacity: 1
+}
+</style></noscript><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+  }
+}
+
+var autoChangeMode = 'false'
+var t = saveToLocal.get('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (saveToLocal.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><style type="text/css">#toggle-sidebar {left:100px}</style><meta name="generator" content="Hexo 5.1.1"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" data-lazy-src="/msj_blog.io/img/avatar.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/msj_blog.io/archives/"><div class="headline">文章</div><div class="length_num">15</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/msj_blog.io/tags/"><div class="headline">标签</div><div class="length_num">13</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/msj_blog.io/categories/"><div class="headline">分类</div><div class="length_num">6</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/msj_blog.io/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/msj_blog.io/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/msj_blog.io/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/msj_blog.io/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/msj_blog.io/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/msj_blog.io/link/"><i class="fa-fw fas fa-link"></i><span> 友情</span></a></div><div class="menus_item"><a class="site-page" href="/msj_blog.io/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><div id="web_bg" data-type="photo"></div><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%981%E3%80%81data-%E4%B8%AD%E5%AE%9A%E4%B9%89%E7%9A%84%E6%95%B0%E6%8D%AE%E5%A6%82%E4%BD%95%E5%9C%A8%E9%A1%B5%E9%9D%A2%E4%B8%AD%E6%98%BE%E7%A4%BA%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">题1、data 中定义的数据如何在页面中显示？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%982%E3%80%81%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F%E9%A1%B9%E7%9B%AE%E4%B8%AD%E6%98%AF%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8%E7%9A%84%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">题2、生命周期函数有哪些？项目中是怎么使用的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%983%E3%80%81%E5%9C%A8-Vue-%E4%B8%AD%E5%A6%82%E4%BD%95%E7%BB%91%E5%AE%9A%E4%BA%8B%E4%BB%B6%EF%BC%9F"><span class="toc-number">3.</span> <span class="toc-text">题3、在 Vue 中如何绑定事件？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%984%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%EF%BC%9F%E9%A1%B9%E7%9B%AE%E4%B8%AD%E6%98%AF%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8%E7%9A%84%EF%BC%9F"><span class="toc-number">4.</span> <span class="toc-text">题4、什么是双向绑定？项目中是怎么使用的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%985%E3%80%81Vue-%E7%BB%84%E4%BB%B6%E4%B8%AD%E7%9A%84-data-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E5%87%BD%E6%95%B0%EF%BC%9F"><span class="toc-number">5.</span> <span class="toc-text">题5、Vue 组件中的 data 为什么是函数？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%EF%BC%9A%E4%BB%80%E4%B9%88%E6%98%AF%E6%8C%89%E5%BC%95%E7%94%A8%E4%BC%A0%E5%80%BC%EF%BC%9F"><span class="toc-number">6.</span> <span class="toc-text">扩展：什么是按引用传值？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%986%E3%80%81%E5%A6%82%E4%BD%95%E5%AE%9A%E4%B9%89%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%EF%BC%9F%E9%A1%B9%E7%9B%AE%E4%B8%AD%E6%98%AF%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8%E7%9A%84%EF%BC%9F"><span class="toc-number">7.</span> <span class="toc-text">题6、如何定义计算属性？项目中是怎么使用的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%987%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E7%9B%91%E5%90%AC%E5%99%A8%EF%BC%9F%E7%9B%91%E5%90%AC%E4%BB%80%E4%B9%88%E7%9A%84%EF%BC%9F%E9%A1%B9%E7%9B%AE%E4%B8%AD%E6%98%AF%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8%E7%9A%84%EF%BC%9F"><span class="toc-number">8.</span> <span class="toc-text">题7、什么是监听器？监听什么的？项目中是怎么使用的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%988%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E8%BF%87%E6%BB%A4%E5%99%A8%EF%BC%9F%E9%A1%B9%E7%9B%AE%E4%B8%AD%E6%98%AF%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8%E7%9A%84%EF%BC%9F%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E8%BF%87%E6%BB%A4%E5%99%A8%EF%BC%9F"><span class="toc-number">9.</span> <span class="toc-text">题8、什么是过滤器？项目中是怎么使用的？如何使用过滤器？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%989%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E6%B7%B7%E5%85%A5%EF%BC%9F%E9%A1%B9%E7%9B%AE%E4%B8%AD%E6%98%AF%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8%E7%9A%84%EF%BC%9F"><span class="toc-number">10.</span> <span class="toc-text">题9、什么是混入？项目中是怎么使用的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%9810%E3%80%81%E5%A6%82%E4%BD%95%E5%B0%86-data-%E4%B8%AD%E5%AE%9A%E4%B9%89%E7%9A%84%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84%E7%BB%91%E5%AE%9A%E5%88%B0-src-%E5%B1%9E%E6%80%A7%E4%B8%8A%EF%BC%9F"><span class="toc-number">11.</span> <span class="toc-text">题10、如何将 data 中定义的图片路径绑定到 src 属性上？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%9811%E3%80%81%E5%9C%A8-Vue-%E4%B8%AD%E4%BD%BF%E7%94%A8%E4%B8%80%E4%B8%AA%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6%E7%9A%84%E6%B5%81%E7%A8%8B%E6%98%AF%EF%BC%9F"><span class="toc-number">12.</span> <span class="toc-text">题11、在 Vue 中使用一个自定义组件的流程是？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%9812%E3%80%81%E7%BB%84%E4%BB%B6%E4%B9%8B%E9%97%B4%E5%A6%82%E4%BD%95%E4%BC%A0%E5%80%BC%EF%BC%9F%E7%88%B6%E5%90%91%E5%AD%90%E4%BC%A0%E5%80%BC%E6%97%B6%EF%BC%8C%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE%E5%B1%9E%E6%80%A7%E7%9A%84%E9%BB%98%E8%AE%A4%E5%80%BC%E5%92%8C%E5%B1%9E%E6%80%A7%E7%9A%84%E7%B1%BB%E5%9E%8B%EF%BC%9F"><span class="toc-number">13.</span> <span class="toc-text">题12、组件之间如何传值？父向子传值时，如何设置属性的默认值和属性的类型？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%9813%E3%80%81style-%E4%B8%8A%E7%9A%84-scoped-%E6%98%AF%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D%EF%BC%9F%E4%BD%BF%E7%94%A8%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">14.</span> <span class="toc-text">题13、style 上的 scoped 是什么意思？使用原理是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%9814%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E6%8F%92%E6%A7%BD%EF%BC%9F%E5%B9%B2%E4%BB%80%E4%B9%88%E7%94%A8%E7%9A%84%EF%BC%9F"><span class="toc-number">15.</span> <span class="toc-text">题14、什么是插槽？干什么用的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%9815%E3%80%81v-if-%E5%92%8C-v-show-%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">16.</span> <span class="toc-text">题15、v-if 和 v-show 的区别？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%9816%E3%80%81v-html-%E7%9A%84%E7%94%A8%E9%80%94%E6%98%AF%EF%BC%9F"><span class="toc-number">17.</span> <span class="toc-text">题16、v-html 的用途是？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%9817%E3%80%81template-%E7%BB%84%E4%BB%B6%E7%9A%84%E7%94%A8%E9%80%94%E6%98%AF%EF%BC%9F"><span class="toc-number">18.</span> <span class="toc-text">题17、template 组件的用途是？</span></a></li></ol></div></div></div><header class="post-bg" id="page-header" style="background-image: url(https://gitee.com/meishijian/pic_imgage/raw/master/image/27.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/msj_blog.io/">没时间</a></span><span id="menus"><div id="search_button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/msj_blog.io/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/msj_blog.io/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/msj_blog.io/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/msj_blog.io/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/msj_blog.io/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/msj_blog.io/link/"><i class="fa-fw fas fa-link"></i><span> 友情</span></a></div><div class="menus_item"><a class="site-page" href="/msj_blog.io/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">前端面试题 -- Vue 基础</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-09-26T00:20:10.000Z" title="发表于 2020-09-26 08:20:10">2020-09-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-09-27T07:54:54.535Z" title="更新于 2020-09-27 15:54:54">2020-09-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/msj_blog.io/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>9分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h2 id="题1、data-中定义的数据如何在页面中显示？"><a href="#题1、data-中定义的数据如何在页面中显示？" class="headerlink" title="题1、data 中定义的数据如何在页面中显示？"></a>题1、data 中定义的数据如何在页面中显示？</h2><p>答：</p>
+<pre><code>1、如果是字符串、数字等，使用插值表达式 &#123;&#123;...&#125;&#125;
+2、如果是数组一般使用 v-for </code></pre>
+<h2 id="题2、生命周期函数有哪些？项目中是怎么使用的？"><a href="#题2、生命周期函数有哪些？项目中是怎么使用的？" class="headerlink" title="题2、生命周期函数有哪些？项目中是怎么使用的？"></a>题2、生命周期函数有哪些？项目中是怎么使用的？</h2><p>答：</p>
+<pre><code>1、创建前后、挂载前后、销毁前后、更新前后、被激活、被隐藏等
+2、项目中常用的：
+
+    created（创建后）：调接口获取页面初始数据。
+    mounted（挂载后）：在页面加载完之后执行一个 DOM 操作的 JS 代码，比如：商城后中的图表功能。</code></pre>
+<h2 id="题3、在-Vue-中如何绑定事件？"><a href="#题3、在-Vue-中如何绑定事件？" class="headerlink" title="题3、在 Vue 中如何绑定事件？"></a>题3、在 Vue 中如何绑定事件？</h2><p>答：</p>
+<pre><code>v-on 或者 @ 。比如：v-on:click 或者 @click。</code></pre>
+<h2 id="题4、什么是双向绑定？项目中是怎么使用的？"><a href="#题4、什么是双向绑定？项目中是怎么使用的？" class="headerlink" title="题4、什么是双向绑定？项目中是怎么使用的？"></a>题4、什么是双向绑定？项目中是怎么使用的？</h2><p>答：</p>
+<pre><code>使用 v-model 指令进行双向绑定。
+项目中：操作表单元素：单选框、复选框、下拉框等时需要定义数据并使用 v-model 进行绑定。</code></pre>
+<h2 id="题5、Vue-组件中的-data-为什么是函数？"><a href="#题5、Vue-组件中的-data-为什么是函数？" class="headerlink" title="题5、Vue 组件中的 data 为什么是函数？"></a>题5、Vue 组件中的 data 为什么是函数？</h2><p>答：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">跟按引用传值有关。</span><br><span class="line">如果不用函数，data 是对象类型的数据，对象都是按引用传递的，会导致：当组件使用多次时，它们会共享用同一个 data 数据，</span><br><span class="line">修改任何一个组件中的 data , 其他的组件也会跟着一起改变，这是不对的，</span><br><span class="line">每个组件实例在使用时应该是完全独立 的，互不影响才对。</span><br><span class="line">所以 data 必须是一个函数，每次在函数中返回一个全新的对象，这样就不会出现共享的问题了。</span><br></pre></td></tr></table></figure>
+
+<h2 id="扩展：什么是按引用传值？"><a href="#扩展：什么是按引用传值？" class="headerlink" title="扩展：什么是按引用传值？"></a>扩展：什么是按引用传值？</h2><p>变量赋值时分为两种情况：</p>
+<p><code>按值传递</code> ：如果是数字、布尔、字符串等基础类型。<br><code>原理</code> ：先把这个值在内存中复制一份，然后赋给另一个变量。<br><code>效果</code> ：赋值之后两个值是两个独立的变量互不影响 。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 按值传递 */</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="number">100</span> <span class="comment">// 数字</span></span><br><span class="line"><span class="keyword">let</span> b = a    <span class="comment">// 按值传递（因为 a 是数字）</span></span><br><span class="line"><span class="comment">// 现在 a 和 b 是两个独立 互不影响 的变量</span></span><br><span class="line">b=<span class="number">200</span>   <span class="comment">// 修改 b 不影响 a </span></span><br><span class="line"><span class="built_in">console</span>.log(a)  <span class="comment">// a 还是 100</span></span><br></pre></td></tr></table></figure>
+
+<p><code>按引用传递</code> ：如果值类型是对象或者数组时。<br><code>原理</code> ：把这个变量在内存中的地址赋给另一个变量。<br><code>效果</code> ：赋值之后，两个变量指向同一个内存地址，其实还是同一个变量，只不过有两个变量名。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 按引用传递 */</span></span><br><span class="line"><span class="keyword">let</span> a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] <span class="comment">// 数组</span></span><br><span class="line"><span class="keyword">let</span> b = a <span class="comment">// 按引用传递（数组和对象都是引用传递）</span></span><br><span class="line"><span class="comment">// a 和 b 指向内存中的同一个地址，a和b是同一个数据</span></span><br><span class="line">b[<span class="number">0</span>] = <span class="number">100</span> <span class="comment">// 把 b 修改</span></span><br><span class="line"><span class="built_in">console</span>.log(a[<span class="number">0</span>]) <span class="comment">// 100 也变成100，</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 所以如果希望复制出一个全新的数组，需要使用 “克隆技术”</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    浅克隆：只克隆最外层的数据。（只克隆一部分）</span></span><br><span class="line"><span class="comment">            方法：let b = [...a]    ， 把 a 克隆一份给 b （浅克隆）</span></span><br><span class="line"><span class="comment">    深克隆：把内层的也复制一份。（完全的克隆）</span></span><br><span class="line"><span class="comment">            方法：let b = JSON.parse(   JSON.stringify(a)  )</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="题6、如何定义计算属性？项目中是怎么使用的？"><a href="#题6、如何定义计算属性？项目中是怎么使用的？" class="headerlink" title="题6、如何定义计算属性？项目中是怎么使用的？"></a>题6、如何定义计算属性？项目中是怎么使用的？</h2><p>答：</p>
+<pre><code>使用 computed 来定义计算属性。制作购物车时里面的商品总价。</code></pre>
+<h2 id="题7、什么是监听器？监听什么的？项目中是怎么使用的？"><a href="#题7、什么是监听器？监听什么的？项目中是怎么使用的？" class="headerlink" title="题7、什么是监听器？监听什么的？项目中是怎么使用的？"></a>题7、什么是监听器？监听什么的？项目中是怎么使用的？</h2><p>答：</p>
+<p>   使用 <code>watch</code> 来定义监听器，一个监听器就是一个函数，函数名就是要监听的 <code>data</code> 中的一个变量的名字，一旦监听的变量发生变量，这个函数就被调用了。</p>
+<p>   监听器分为 <code>浅监听</code> 和 <code>深度监听</code> ，当监听的数据是一个复杂的数据类型（数组、对象）时需要使用 <code>深度监听</code> 。</p>
+<p>   在项目中实现数据 <code>搜索</code> 、 <code>排序</code> 、 <code>翻页</code> 时使用过，每当用户点击 <code>翻页</code> 、 <code>排序</code> 、 <code>搜索条件</code> 的按钮时就要重新调用接口，所以我定义了一个 <code>变量</code> ，保存翻页、排序、搜索的信息，然后使用监听器监听这个变量，一量发生变化就重新调用接口获取数据</p>
+<p>   代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">data() &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="comment">// 保存翻页、搜索关键字、排序信息</span></span><br><span class="line">            info: &#123;</span><br><span class="line">                page: <span class="number">1</span>,</span><br><span class="line">                keywords: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">                sortby: <span class="string">&#x27;id&#x27;</span>,</span><br><span class="line">                sortway: <span class="string">&#x27;desc&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 监听器</span></span><br><span class="line">    watch: &#123;</span><br><span class="line">        <span class="comment">// 当条件改变时重新调用接口</span></span><br><span class="line">        info: &#123;</span><br><span class="line">            deep: <span class="literal">true</span>, <span class="comment">// 深度监听</span></span><br><span class="line">            handle: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">                <span class="comment">// 重新调用接口获取数据</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="题8、什么是过滤器？项目中是怎么使用的？如何使用过滤器？"><a href="#题8、什么是过滤器？项目中是怎么使用的？如何使用过滤器？" class="headerlink" title="题8、什么是过滤器？项目中是怎么使用的？如何使用过滤器？"></a>题8、什么是过滤器？项目中是怎么使用的？如何使用过滤器？</h2><p>答：</p>
+<p>   使用 <code>filter</code> 定义过滤器。</p>
+<p>   过滤器分为 <code>全局过滤器</code> 和 <code>局部过滤器</code> 。</p>
+<p><code>全局过滤器</code> ：在任何一个组件中可以直接使用。<br><code>局部过滤器</code> ：在组件中需要先引入，再注册到组件的 <code>filter</code> 中，然后才能使用。</p>
+<p>   当一个绝对时间（发表文章时间）在显示时转化成一个相对时间，项目中的实现思路：</p>
+<pre><code>1、先定义了一个叫做 relativeTime 的全局变量器
+2、在组件中使用： &#123;&#123; time | relativeTime &#125;&#125;</code></pre>
+<h2 id="题9、什么是混入？项目中是怎么使用的？"><a href="#题9、什么是混入？项目中是怎么使用的？" class="headerlink" title="题9、什么是混入？项目中是怎么使用的？"></a>题9、什么是混入？项目中是怎么使用的？</h2><p>答：</p>
+<p><code>mixins</code> 是 <code>定义混入</code> 。可以把一段 JS 代码合并到一个 Vue 组件中。<br><code>用途</code> ：可以把多个组件共用的 <code>JS 代码单独提取出来</code> 放到一个 JS 文件中，然后哪个组件中需要就直接混入。</p>
+<p>之前写的商城后台的项目：使用了混入实现的把组件中的 <code>JS 代码</code> 和 <code>HTML+CSS</code> 分离写在两个文件中。</p>
+<p><code>实现思路</code> ：</p>
+<pre><code>1、把 JS 代码单独写到一个 JS 文件中
+2、在 .vue 文件中使用 mixins: [ js 文件] 混入进来</code></pre>
+<h2 id="题10、如何将-data-中定义的图片路径绑定到-src-属性上？"><a href="#题10、如何将-data-中定义的图片路径绑定到-src-属性上？" class="headerlink" title="题10、如何将 data 中定义的图片路径绑定到 src 属性上？"></a>题10、如何将 data 中定义的图片路径绑定到 src 属性上？</h2><p>答：</p>
+<p>使用 <code>v-bind</code> 或者 <code>:</code><br>比如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt; <span class="attr">img:</span> <span class="attr">src</span>=<span class="string">&quot;image&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt; <span class="attr">img</span> <span class="attr">v</span> <span class="attr">-</span> <span class="attr">bind:</span> <span class="attr">src</span>=<span class="string">&quot;image&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">data: &#123;</span><br><span class="line">image: &#x27;http://www.ww.ww/1.jpg&#x27;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="题11、在-Vue-中使用一个自定义组件的流程是？"><a href="#题11、在-Vue-中使用一个自定义组件的流程是？" class="headerlink" title="题11、在 Vue 中使用一个自定义组件的流程是？"></a>题11、在 Vue 中使用一个自定义组件的流程是？</h2><p>答：<br>自定义组件有两种情况：</p>
+<p><code>全局组件</code> ：直接在页面中使用 ，比如：<br><code>局部组件</code> ：先引入、再组件，然后才能使用。</p>
+<p>创建一个自定义组件，比如：Hello.vue 组件</p>
+<p>1、使用 import 引入这个 <code>自定义组件</code> ，比如： <code>import Hello from &#39;Hello.vue&#39;</code><br>2、注册这个组件，在 Vue 的 <code>components: &#123; Hello &#125;</code><br>3、使用</p>
+<h2 id="题12、组件之间如何传值？父向子传值时，如何设置属性的默认值和属性的类型？"><a href="#题12、组件之间如何传值？父向子传值时，如何设置属性的默认值和属性的类型？" class="headerlink" title="题12、组件之间如何传值？父向子传值时，如何设置属性的默认值和属性的类型？"></a>题12、组件之间如何传值？父向子传值时，如何设置属性的默认值和属性的类型？</h2><p>答：</p>
+<p><code>父&gt;子</code> 使用属性 ，注意，需要在子组件中使用 <code>props</code> 来接收属性。<br><code>子&gt;父</code> 使用 事件，注意：在子组件中使用 <code>this.$emit(事件名，数据）</code> 触发父组件中的事件<br><code>兄弟之间</code> 使用 <code>Bus 总线</code> 的中间组件实现。</p>
+<p><strong>父向子传值时，如何设置属性的默认值和属性的类型？</strong><br>在子组件中使用 <code>props</code> 接收属性：</p>
+<p>写法一、 <code>不设置类型和默认值</code><br>props: [ ‘name’, ‘age’ ] // 接收 name 和 age ，不限制类型</p>
+<p>写法二、 <code>限制类型和默认值</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">props: &#123;</span><br><span class="line">    name: &#123;</span><br><span class="line">        type: <span class="built_in">String</span>,</span><br><span class="line">        <span class="keyword">default</span>: <span class="string">&#x27;&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    age: &#123;</span><br><span class="line">        type: <span class="built_in">Number</span>,</span><br><span class="line">        <span class="keyword">default</span>: <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="题13、style-上的-scoped-是什么意思？使用原理是什么？"><a href="#题13、style-上的-scoped-是什么意思？使用原理是什么？" class="headerlink" title="题13、style 上的 scoped 是什么意思？使用原理是什么？"></a>题13、style 上的 scoped 是什么意思？使用原理是什么？</h2><p>答：<br><code>里面的样式</code> 只对当前这个 <code>组件生效</code> ， <code>不会影响</code> 其他组件。</p>
+<p>当添加了 <code>scoped</code> 之后，vue 会在这个组件中所有的标签上都添加一个 <code>唯一的标识符</code> ，</p>
+<p>只有这个组件中的标签上才有这个 <code>标签符</code> ，然后在 CSS 上会通过这个属性来 <code>限制 CSS </code> 的应用范围。</p>
+<p>1、组件中 <code>添加属性</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">data-v-26084dc2</span> <span class="attr">class</span>=<span class="string">&quot;login&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">data-v-26084dc2</span> <span class="attr">class</span>=<span class="string">&quot;login-btnBox&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">form</span> <span class="attr">data-v-26084dc2</span> <span class="attr">class</span>=<span class="string">&quot;login-form&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>2、css 上通过属性来 <code>限制范围</code></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 通过属性选择器就只对当前这个组件中的 .count 生效 */</span></span><br><span class="line"><span class="selector-class">.count</span> <span class="selector-attr">[ data-v-26084dc2]</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="题14、什么是插槽？干什么用的？"><a href="#题14、什么是插槽？干什么用的？" class="headerlink" title="题14、什么是插槽？干什么用的？"></a>题14、什么是插槽？干什么用的？</h2><p>答：</p>
+<p>组件中会在 <code>特定的位置</code> 上留插槽，我们可以在使用这个组件时向这个插槽中 <code>添加HTML的结构</code> ，目的是可以自己 <code>扩展一个组件的功能</code> 。</p>
+<p>比如：项目中使用的 <code>vant</code> 的导航栏组件，但是它 <code>默认的图标</code> 不满足要求，所以我们可以使用它的 <code>插槽</code> ，自己来 <code>定义图标</code> 这个区域的内容。</p>
+<p>插槽分为两种：<br><code>匿名插槽（默认插槽）</code> : 一个组件中只能有一个 <code>匿名插槽</code> , 如果在组件中间 <code>不使用 slot</code> 默认放到匿名插槽的位置。</p>
+<p><code>有名插槽</code> ：一个组件中可以有 <code>多个有名的插槽</code> , 向有名插槽中放数据时需要 <code>使用 slot</code> 属性指定插槽的名字</p>
+<h2 id="题15、v-if-和-v-show-的区别？"><a href="#题15、v-if-和-v-show-的区别？" class="headerlink" title="题15、v-if 和 v-show 的区别？"></a>题15、v-if 和 v-show 的区别？</h2><p>答：</p>
+<p><code>共同</code> ：v-if 和 v-show 都是控制一个元素是否显示。<br><code>区别</code> ：v-if 如果是 false 就不渲染这个元素，页面中没有这个元素<br><code>v-show</code> 无论 true 和 false 都会渲染这个元素，页面中始终有这个元素，当 false 时使用 display: none 把它隐藏。</p>
+<h2 id="题16、v-html-的用途是？"><a href="#题16、v-html-的用途是？" class="headerlink" title="题16、v-html 的用途是？"></a>题16、v-html 的用途是？</h2><p>答：<br>把一个 HTML 字符串 <code>解析</code> 成 HTML 显示出来。<br>比如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; str &#125;&#125; ------------&gt;</span><br><span class="line"><span class="comment">&lt;!-- 当成普通字符串显示出来：  &lt;h1&gt;hello&lt;/h1&gt; --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-html</span>=<span class="string">&quot;str&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span> ----------&gt;</span><br><span class="line"><span class="comment">&lt;!-- 解析 h1 标签，显示出来是一个加粗放大的 hello --&gt;</span></span><br><span class="line"></span><br><span class="line">data: &#123;</span><br><span class="line">str: &#x27;<span class="tag">&lt;<span class="name">h1</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">h1</span>&gt;</span>&#x27;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="题17、template-组件的用途是？"><a href="#题17、template-组件的用途是？" class="headerlink" title="题17、template 组件的用途是？"></a>题17、template 组件的用途是？</h2><p>答：<br>这个标签在页面中 <code>不会渲染</code> 出任何元素，它的用途是把 <code>多个标签套起来</code> 当成一个 <code>整体</code> 。</p>
+<p>比如有三个 div 标签要循环</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>abc<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>abc<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>abc<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>必须要使用一元素套起来</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">&quot;v in 10&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>abc<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>abc<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>abc<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这样最外层多了一个 div，如果不想要外层 div 可以使用 tempalte</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">v-for</span>=<span class="string">&quot;v in 10&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>abc<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>abc<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>abc<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">没时间</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://github.com/meishijian/msj_blog.io/2020/09/26/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98-Vue%20%E5%9F%BA%E7%A1%80/">https://github.com/meishijian/msj_blog.io/2020/09/26/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98-Vue%20%E5%9F%BA%E7%A1%80/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://github.com/meishijian/msj_blog.io" target="_blank">没时间</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/msj_blog.io/tags/vue/">vue</a><a class="post-meta__tags" href="/msj_blog.io/tags/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/">前端面试题</a></div><div class="post_share"><div class="social-share" data-image="https://gitee.com/meishijian/pic_imgage/raw/master/image/27.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/msj_blog.io/2020/09/26/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98-Vue%20%E8%B7%AF%E7%94%B1/"><img class="prev-cover" data-lazy-src="https://gitee.com/meishijian/pic_imgage/raw/master/image/49.jpg" onerror="onerror=null;src='/msj_blog.io/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">前端面试题 -- Vue 路由</div></div></a></div><div class="next-post pull-right"><a href="/msj_blog.io/2020/09/25/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98-JavaScript/"><img class="next-cover" data-lazy-src="https://gitee.com/meishijian/pic_imgage/raw/master/image/102.jpg" onerror="onerror=null;src='/msj_blog.io/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">前端面试题 -- JavaScript</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/msj_blog.io/2020/09/26/前端面试题-Vue 路由/" title="前端面试题 -- Vue 路由"><img class="cover" data-lazy-src="https://gitee.com/meishijian/pic_imgage/raw/master/image/49.jpg"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-26</div><div class="title">前端面试题 -- Vue 路由</div></div></a></div><div><a href="/msj_blog.io/2020/09/26/前端面试题-Vue Axios/" title="前端面试题 -- Vue Axios"><img class="cover" data-lazy-src="https://gitee.com/meishijian/pic_imgage/raw/master/image/51.jpg"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-26</div><div class="title">前端面试题 -- Vue Axios</div></div></a></div><div><a href="/msj_blog.io/2020/09/26/前端面试题-Vue Vuex/" title="前端面试题 -- Vue Vuex"><img class="cover" data-lazy-src="https://gitee.com/meishijian/pic_imgage/raw/master/image/56.jpg"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-26</div><div class="title">前端面试题 -- Vue Vuex</div></div></a></div><div><a href="/msj_blog.io/2020/09/11/发布Vue组件库到NPM上/" title="发布Vue组件库到NPM上"><img class="cover" data-lazy-src="https://gitee.com/meishijian/pic_imgage/raw/master/image/14.jpg"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-11</div><div class="title">发布Vue组件库到NPM上</div></div></a></div><div><a href="/msj_blog.io/2020/09/25/前端面试题-JavaScript/" title="前端面试题 -- JavaScript"><img class="cover" data-lazy-src="https://gitee.com/meishijian/pic_imgage/raw/master/image/102.jpg"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-25</div><div class="title">前端面试题 -- JavaScript</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></article></main><footer id="footer" style="background-image: url(https://gitee.com/meishijian/pic_imgage/raw/master/image/27.jpg)" data-type="photo"><div id="footer-wrap"><div class="copyright">&copy;2020 By 没时间</div><div class="footer_custom_text">欢迎来到 没时间 小网站</div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/msj_blog.io/js/utils.js"></script><script src="/msj_blog.io/js/main.js"></script><script src="/msj_blog.io/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/msj_blog.io/js/search/local-search.js"></script><script>var endLoading = function () {
+  document.body.style.overflow = 'auto';
+  document.getElementById('loading-box').classList.add("loaded")
+}
+window.addEventListener('load',endLoading)</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    window.valine = new Valine({
+      el: '#vcomment',
+      appId: 'Spl0heyMCukAQ7af4RRkMRVa-gzGzoHsz',
+      appKey: 'jtNWtJOyj1y6dNd42hcrSXYX',
+      placeholder: '记得留下你的暱称和邮箱....可以快速收到回復',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: 'https://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+    });
+    if ('nick,mail') { valine.config.requiredFields= 'nick,mail'.split(',') }
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else $.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><div class="aplayer no-destroy" data-id="2679131836" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-loop="all" data-listFolded="true" data-order="list" data-preload="metadata" data-autoplay="true" muted></div><script defer="defer" id="ribbon_piao" mobile="false" src="/msj_blog.io/js/third-party/piao.js"></script><script src="/msj_blog.io/js/third-party/click_heart.js" async="async"></script><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "e44c9222-c415-45b1-a287-32c1a1e42fb9";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (true) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (true) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  'meta[name=description]',
+  '#config_change',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  $('script[data-pjax]').each(function () {
+    $(this).parent().append($(this).remove())
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  if (typeof gtag === 'function') {
+    gtag('config', '', {'page_path': window.location.pathname});
+  }
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+
+document.addEventListener('pjax:send', function () {
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  $(window).off('scroll')
+
+  //reset readmode
+  $('body').hasClass('read-mode') && $('body').removeClass('read-mode')
+
+})</script></div></body></html>

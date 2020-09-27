@@ -1,0 +1,295 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>前端面试题 -- Vue Axios | 没时间</title><meta name="description" content="题1、如何配置基地址？为什么要配置？答：写法一、 axios.defaults.baseURL &#x3D; &#39;http:&#x2F;&#x2F;xxxxx&#39;写法二、 123const request &#x3D; axios.create(&amp;#123;    baseURL: &amp;#x27;http:&#x2F;&#x2F;xxxxx&amp;#x27;&amp;#125;)  每次调用接口时都需要写上 完整的接口地址 ，但是每个接口前面的地址是相同的，"><meta name="keywords" content="vue,前端面试题,Axios"><meta name="author" content="没时间"><meta name="copyright" content="没时间"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="shortcut icon" href="/msj_blog.io/img/favicon.png"><link rel="canonical" href="https://github.com/meishijian/msj_blog.io/2020/09/26/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98-Vue%20Axios/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="article"><meta property="og:title" content="前端面试题 -- Vue Axios"><meta property="og:url" content="https://github.com/meishijian/msj_blog.io/2020/09/26/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98-Vue%20Axios/"><meta property="og:site_name" content="没时间"><meta property="og:description" content="题1、如何配置基地址？为什么要配置？答：写法一、 axios.defaults.baseURL &#x3D; &#39;http:&#x2F;&#x2F;xxxxx&#39;写法二、 123const request &#x3D; axios.create(&amp;#123;    baseURL: &amp;#x27;http:&#x2F;&#x2F;xxxxx&amp;#x27;&amp;#125;)  每次调用接口时都需要写上 完整的接口地址 ，但是每个接口前面的地址是相同的，"><meta property="og:image" content="https://gitee.com/meishijian/pic_imgage/raw/master/image/51.jpg"><meta property="article:published_time" content="2020-09-26T00:30:10.000Z"><meta property="article:modified_time" content="2020-09-27T08:15:25.410Z"><meta name="twitter:card" content="summary"><link rel="stylesheet" href="/msj_blog.io/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script>var GLOBAL_CONFIG = { 
+  root: '/msj_blog.io/',
+  hexoversion: '5.1.1',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime: '天',
+  date_suffix: {"one_hour":"刚刚","hours":"小时前","day":"天前"},
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+    },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2020-09-27 16:15:25'
+}</script><noscript><style type="text/css">
+#nav {
+  opacity: 1
+}
+.justified-gallery img {
+  opacity: 1
+}
+</style></noscript><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+  }
+}
+
+var autoChangeMode = 'false'
+var t = saveToLocal.get('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (saveToLocal.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><style type="text/css">#toggle-sidebar {left:100px}</style><meta name="generator" content="Hexo 5.1.1"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" data-lazy-src="/msj_blog.io/img/avatar.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/msj_blog.io/archives/"><div class="headline">文章</div><div class="length_num">15</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/msj_blog.io/tags/"><div class="headline">标签</div><div class="length_num">13</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/msj_blog.io/categories/"><div class="headline">分类</div><div class="length_num">6</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/msj_blog.io/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/msj_blog.io/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/msj_blog.io/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/msj_blog.io/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/msj_blog.io/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/msj_blog.io/link/"><i class="fa-fw fas fa-link"></i><span> 友情</span></a></div><div class="menus_item"><a class="site-page" href="/msj_blog.io/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><div id="web_bg" data-type="photo"></div><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%981%E3%80%81%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%E5%9F%BA%E5%9C%B0%E5%9D%80%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E9%85%8D%E7%BD%AE%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">题1、如何配置基地址？为什么要配置？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%982%E3%80%81axios-%E4%B8%AD%E6%9C%89%E5%87%A0%E4%B8%AA%E6%8B%A6%E6%88%AA%E5%99%A8%EF%BC%9F%E9%A1%B9%E7%9B%AE%E4%B8%AD%E6%98%AF%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8%E7%9A%84%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">题2、axios 中有几个拦截器？项目中是怎么使用的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%983%E3%80%81%E5%A6%82%E4%BD%95%E5%B9%B6%E5%8F%91%E6%89%A7%E8%A1%8C%E5%A4%9A%E4%B8%AA-AJAX-%E8%AF%B7%E6%B1%82%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%B9%B6%E5%8F%91%EF%BC%9F"><span class="toc-number">3.</span> <span class="toc-text">题3、如何并发执行多个 AJAX 请求？为什么要并发？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%984%E3%80%81%E5%9C%A8-Vue-%E4%B8%AD%E4%BD%BF%E7%94%A8-axios-%E7%9A%84%E6%B5%81%E7%A8%8B%EF%BC%9F"><span class="toc-number">4.</span> <span class="toc-text">题4、在 Vue 中使用 axios 的流程？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%985%E3%80%81axios-%E4%B8%AD%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE%E8%AF%B7%E6%B1%82-HTTP-%E5%8D%8F%E8%AE%AE%E5%A4%B4%E4%BF%A1%E6%81%AF%EF%BC%9F"><span class="toc-number">5.</span> <span class="toc-text">题5、axios 中如何设置请求 HTTP 协议头信息？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%EF%BC%9A%E4%BB%80%E4%B9%88%E6%98%AF-HTTP-%E5%8D%8F%E8%AE%AE%EF%BC%9F"><span class="toc-number">6.</span> <span class="toc-text">扩展：什么是 HTTP 协议？</span></a></li></ol></div></div></div><header class="post-bg" id="page-header" style="background-image: url(https://gitee.com/meishijian/pic_imgage/raw/master/image/51.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/msj_blog.io/">没时间</a></span><span id="menus"><div id="search_button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/msj_blog.io/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/msj_blog.io/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/msj_blog.io/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/msj_blog.io/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/msj_blog.io/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/msj_blog.io/link/"><i class="fa-fw fas fa-link"></i><span> 友情</span></a></div><div class="menus_item"><a class="site-page" href="/msj_blog.io/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">前端面试题 -- Vue Axios</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-09-26T00:30:10.000Z" title="发表于 2020-09-26 08:30:10">2020-09-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-09-27T08:15:25.410Z" title="更新于 2020-09-27 16:15:25">2020-09-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/msj_blog.io/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h2 id="题1、如何配置基地址？为什么要配置？"><a href="#题1、如何配置基地址？为什么要配置？" class="headerlink" title="题1、如何配置基地址？为什么要配置？"></a>题1、如何配置基地址？为什么要配置？</h2><p>答：<br>写法一、 <code>axios.defaults.baseURL = &#39;http://xxxxx&#39;</code><br>写法二、</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> request = axios.create(&#123;</span><br><span class="line">    baseURL: <span class="string">&#x27;http://xxxxx&#x27;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>每次调用接口时都需要写上 <code>完整的接口地址</code> ，但是每个接口前面的地址是相同的，</p>
+<p>所以我们可以把接口地址中前面 <code>相同的部分</code> 提取出来设置一下，这样在后面调用接口时就 <code>不需要写前面的地址</code> 了。</p>
+<p>每个接口地址前面相同的部分就是 <code>基地址</code> 。</p>
+<h2 id="题2、axios-中有几个拦截器？项目中是怎么使用的？"><a href="#题2、axios-中有几个拦截器？项目中是怎么使用的？" class="headerlink" title="题2、axios 中有几个拦截器？项目中是怎么使用的？"></a>题2、axios 中有几个拦截器？项目中是怎么使用的？</h2><p>答：两个拦截器：<br><code>前置（请求）拦截器</code> ：就是一个函数，在 <code>每次调用接口之前</code> 都会触发的函数。<br><code>后置（响应）拦截器</code> ：就是一个函数，每次服务器 <code>返回结果之后</code> 触发的函数。</p>
+<p><code>前置拦截器</code> ：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 注册时有两个函数，</span></span><br><span class="line">request.interceptors.request.use(<span class="function"><span class="keyword">function</span>(<span class="params">config</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 每次请求成功时执行</span></span><br><span class="line"></span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 每次请求如果失败时执行</span></span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>后置拦截器 ：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 注册时有两个函数，</span></span><br><span class="line">request.interceptors.response.use(<span class="function"><span class="keyword">function</span>(<span class="params">config</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 每次请求成功时执行</span></span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 每次请求如果失败时执行</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>基于这 <code>两个函数</code> 的特点：<br>前置拦截器（为每次请求 <code>添加令牌</code> ）：</p>
+<pre><code>1、请求接口时要把令牌放到协议头上提交给接口
+2、每次请求接口之前都放令牌比较麻烦
+3、所以，可以在前置拦截器中只写一次代码，就可以在每次请求时把令牌放上</code></pre>
+<p>后置拦截器（判断每次请求 <code>是否失败</code> ）：</p>
+<pre><code>1、每次调用完接口之后都要判断是否失败，如果失败就提交错误信息
+2、我们可以在后置拦截器中写一次代码，判断如果返回错误就提示错误信息
+3、这样之后，以后在项目中就不用再判断接口是否失败了</code></pre>
+<h2 id="题3、如何并发执行多个-AJAX-请求？为什么要并发？"><a href="#题3、如何并发执行多个-AJAX-请求？为什么要并发？" class="headerlink" title="题3、如何并发执行多个 AJAX 请求？为什么要并发？"></a>题3、如何并发执行多个 AJAX 请求？为什么要并发？</h2><p>答：<br>使用 <code>Promise.all</code> 来执行多个异步代码，在 axios 中也可以使用 <code>axios.all</code> 。</p>
+<p>比如：两个接口时第一个执行完之后，再执行第二个，所以如果每个接口需要 <code>2</code> 秒执行完，那么调用下面两个接口一共要花费 <code>4</code> 秒。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> created() &#123;</span><br><span class="line">    <span class="keyword">let</span> users = <span class="keyword">await</span> getUsers()</span><br><span class="line">    <span class="keyword">let</span> articles = <span class="keyword">await</span> getArticles()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为这两个接口没有先后的关系，所以我们为了 <code>提高性能</code> 可以并发调用。<br>可以使用 <code>Promise.all</code> 让多个 <code>异步并发执行</code> 。<br>上面的代码改成下面的样子， <code>两个代码同时执行</code> ，最终只需要 <code>2</code> 秒就可以完成。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> created() &#123;</span><br><span class="line"></span><br><span class="line">     <span class="comment">// 同时执行两个异步代码</span></span><br><span class="line">    <span class="keyword">const</span> [users, articles] = <span class="built_in">Promise</span>.all(getUsers(), getArticles())</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="题4、在-Vue-中使用-axios-的流程？"><a href="#题4、在-Vue-中使用-axios-的流程？" class="headerlink" title="题4、在 Vue 中使用 axios 的流程？"></a>题4、在 Vue 中使用 axios 的流程？</h2><p>答：</p>
+<p>1、 <code>安装</code> axios<br>2、在 <code>main.js</code> 中引入 <code>axios</code><br>3、 <code>配置</code> axios （基地址、拦截器）<br>4、把 axios <code>注册到</code> Vue 的原型上（ <code>Vue.prototype.$axios = axios</code> ）<br>5、注册到原型上之后，就可以直接在任何一个组件中使用 <code>this.$axios</code> 来获取 axios 并使用了。</p>
+<p>扩展：如果没注册到原型上，那么在每个组件中如果要使用需要先引入再使用：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&#x27;axios&#x27;</span></span><br><span class="line"></span><br><span class="line">axios.get(...）</span><br></pre></td></tr></table></figure>
+
+<h2 id="题5、axios-中如何设置请求-HTTP-协议头信息？"><a href="#题5、axios-中如何设置请求-HTTP-协议头信息？" class="headerlink" title="题5、axios 中如何设置请求 HTTP 协议头信息？"></a>题5、axios 中如何设置请求 HTTP 协议头信息？</h2><p>答：<br>我们向服务器提交数据时有三个地方：<br>1、 <code>URL</code> 上（小的数据，id、页码、搜索关键字等），比如：/users?page=1&amp;id=122<br>2、 <code>body </code> 中（POST方式提交的数据），比如：用户名、密码、图片、JSON等。<br>3、 <code>http 协议头</code> 上，比如：token 令牌、CORS（AJAX跨域）、接口限频（案例）、HTTP缓存等。<br>图示位置：<br><img src= "/msj_blog.io/img/loading.gif" data-lazy-src="https://gitee.com/meishijian/pic_imgage/raw/master/%E9%9D%A2%E8%AF%95%E9%A2%98/01.png"><br>在 axios 中的写法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. URL 上提交</span></span><br><span class="line">写法一、 写在 ?</span><br><span class="line">    axios.get(<span class="string">&#x27;/users?id=1&amp;page=1&#x27;</span>)</span><br><span class="line">写法二、</span><br><span class="line">axios.get(<span class="string">&#x27;/users&#x27;</span>, &#123;</span><br><span class="line">    params: &#123;</span><br><span class="line">        id: <span class="number">1</span>,</span><br><span class="line">        page: <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 在 body 中提交（POST、PUT方式）</span></span><br><span class="line">axios.post(<span class="string">&#x27;/users&#x27;</span>, &#123;</span><br><span class="line">    username: <span class="number">111</span>,</span><br><span class="line">    password: <span class="number">123</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 在协议头上放</span></span><br><span class="line">写法一、 每次发送请求时单独设置</span><br><span class="line">axios.post(<span class="string">&#x27;/users&#x27;</span>, &#123;&#125;, &#123;</span><br><span class="line">    headers: &#123;</span><br><span class="line">        Content - Type: <span class="string">&#x27;application/json&#x27;</span>,</span><br><span class="line">        Authorization: <span class="string">&#x27;Beaer xxxxxxx&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">写法二、 为所有请求设置公共的</span><br><span class="line">axios.defaults.headers[<span class="string">&#x27;Content-Type&#x27;</span>] = <span class="string">&#x27;application/json&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="扩展：什么是-HTTP-协议？"><a href="#扩展：什么是-HTTP-协议？" class="headerlink" title="扩展：什么是 HTTP 协议？"></a>扩展：什么是 HTTP 协议？</h2><p>答： <code>浏览器</code> 和 <code>服务器</code> 通信时的一种 <code>规定好结构的字符串</code> 。<br>图示位置：<br><img src= "/msj_blog.io/img/loading.gif" data-lazy-src="https://gitee.com/meishijian/pic_imgage/raw/master/Vue/02.png"></p>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">没时间</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://github.com/meishijian/msj_blog.io/2020/09/26/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98-Vue%20Axios/">https://github.com/meishijian/msj_blog.io/2020/09/26/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98-Vue%20Axios/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://github.com/meishijian/msj_blog.io" target="_blank">没时间</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/msj_blog.io/tags/vue/">vue</a><a class="post-meta__tags" href="/msj_blog.io/tags/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98/">前端面试题</a><a class="post-meta__tags" href="/msj_blog.io/tags/Axios/">Axios</a></div><div class="post_share"><div class="social-share" data-image="https://gitee.com/meishijian/pic_imgage/raw/master/image/51.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/msj_blog.io/2020/09/26/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98-Vue%20Vuex/"><img class="prev-cover" data-lazy-src="https://gitee.com/meishijian/pic_imgage/raw/master/image/56.jpg" onerror="onerror=null;src='/msj_blog.io/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">前端面试题 -- Vue Vuex</div></div></a></div><div class="next-post pull-right"><a href="/msj_blog.io/2020/09/26/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98-Vue%20%E8%B7%AF%E7%94%B1/"><img class="next-cover" data-lazy-src="https://gitee.com/meishijian/pic_imgage/raw/master/image/49.jpg" onerror="onerror=null;src='/msj_blog.io/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">前端面试题 -- Vue 路由</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/msj_blog.io/2020/09/26/前端面试题-Vue 路由/" title="前端面试题 -- Vue 路由"><img class="cover" data-lazy-src="https://gitee.com/meishijian/pic_imgage/raw/master/image/49.jpg"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-26</div><div class="title">前端面试题 -- Vue 路由</div></div></a></div><div><a href="/msj_blog.io/2020/09/26/前端面试题-Vue 基础/" title="前端面试题 -- Vue 基础"><img class="cover" data-lazy-src="https://gitee.com/meishijian/pic_imgage/raw/master/image/27.jpg"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-26</div><div class="title">前端面试题 -- Vue 基础</div></div></a></div><div><a href="/msj_blog.io/2020/09/26/前端面试题-Vue Vuex/" title="前端面试题 -- Vue Vuex"><img class="cover" data-lazy-src="https://gitee.com/meishijian/pic_imgage/raw/master/image/56.jpg"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-26</div><div class="title">前端面试题 -- Vue Vuex</div></div></a></div><div><a href="/msj_blog.io/2020/09/11/发布Vue组件库到NPM上/" title="发布Vue组件库到NPM上"><img class="cover" data-lazy-src="https://gitee.com/meishijian/pic_imgage/raw/master/image/14.jpg"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-11</div><div class="title">发布Vue组件库到NPM上</div></div></a></div><div><a href="/msj_blog.io/2020/09/25/前端面试题-JavaScript/" title="前端面试题 -- JavaScript"><img class="cover" data-lazy-src="https://gitee.com/meishijian/pic_imgage/raw/master/image/102.jpg"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-25</div><div class="title">前端面试题 -- JavaScript</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></article></main><footer id="footer" style="background-image: url(https://gitee.com/meishijian/pic_imgage/raw/master/image/51.jpg)" data-type="photo"><div id="footer-wrap"><div class="copyright">&copy;2020 By 没时间</div><div class="footer_custom_text">欢迎来到 没时间 小网站</div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/msj_blog.io/js/utils.js"></script><script src="/msj_blog.io/js/main.js"></script><script src="/msj_blog.io/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/msj_blog.io/js/search/local-search.js"></script><script>var endLoading = function () {
+  document.body.style.overflow = 'auto';
+  document.getElementById('loading-box').classList.add("loaded")
+}
+window.addEventListener('load',endLoading)</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    window.valine = new Valine({
+      el: '#vcomment',
+      appId: 'Spl0heyMCukAQ7af4RRkMRVa-gzGzoHsz',
+      appKey: 'jtNWtJOyj1y6dNd42hcrSXYX',
+      placeholder: '记得留下你的暱称和邮箱....可以快速收到回復',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: 'https://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+    });
+    if ('nick,mail') { valine.config.requiredFields= 'nick,mail'.split(',') }
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else $.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><div class="aplayer no-destroy" data-id="2679131836" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-loop="all" data-listFolded="true" data-order="list" data-preload="metadata" data-autoplay="true" muted></div><script defer="defer" id="ribbon_piao" mobile="false" src="/msj_blog.io/js/third-party/piao.js"></script><script src="/msj_blog.io/js/third-party/click_heart.js" async="async"></script><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "e44c9222-c415-45b1-a287-32c1a1e42fb9";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (true) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (true) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  'meta[name=description]',
+  '#config_change',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  $('script[data-pjax]').each(function () {
+    $(this).parent().append($(this).remove())
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  if (typeof gtag === 'function') {
+    gtag('config', '', {'page_path': window.location.pathname});
+  }
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+
+document.addEventListener('pjax:send', function () {
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  $(window).off('scroll')
+
+  //reset readmode
+  $('body').hasClass('read-mode') && $('body').removeClass('read-mode')
+
+})</script></div></body></html>
